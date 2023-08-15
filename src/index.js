@@ -13,7 +13,6 @@ import { logger } from 'redux-logger'
 // * Reducers *
 // Add airline to the redux state
 const airlineList = (state = [], action) => {
-  console.log('Airline Reducer')
   if (action.type === 'ADD_AIRLINE') {
     // Create new array with original values
     // AND the new value from action.payload

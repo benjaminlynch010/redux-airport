@@ -3,18 +3,43 @@ import { useSelector, useDispatch } from 'react-redux'
 
 function App() {
   // Get airlineList from redux
-  const airlineList = useSelector(store.airlineList)
+  const airlineList = useSelector(store => store.airlineList)
+  // Track new airline to add in local state
+  const [ newAirline, setNewAirline ] = useState('')
   // talk to redux from react
   const dispatch = useDispatch();
 
+  const handleSubmit = (event) => {
+    // Don't reload when we submit form
+    event.preventDefault()
+    // Tell redux to add new airline
+    dispatch({
+      type: 'ADD_AIRLINE',
+      // Pass new airline, tracking in state
+    })
+    // Clear the form
+    setNewAirline('')
+  }
   
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <h1>Redux Airport</h1>
-      <input placeholder='Airline Name' />
-      <button>Add Airline</button>
-      <table>{/* Airlines should be listed here */}</table>
-    </div>
+      <h3>New Airline : {newAirline}</h3>
+      <input 
+        type='text' 
+        placeholder='Airline Name'
+        value={newAirline}
+        onChange={ event => setNewAirline(event.target.value)} 
+        />
+      <button type='submit'>Add Airline</button>
+      <ul>
+        {airlineList.map((airline, index) => 
+          <li key={index}>{airline}</li>
+        )}
+      </ul> 
+    </form>
+    
+    
   );
 }
 
