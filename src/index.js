@@ -8,8 +8,6 @@ import { Provider } from 'react-redux'
 import { logger } from 'redux-logger'
 
 
-
-
 // * Reducers *
 // Add airline to the redux state
 const airlineList = (state = [], action) => {
@@ -28,7 +26,6 @@ const airlineList = (state = [], action) => {
 const storeInstance = createStore(
   airlineList
 )
-
 
 // Add Provider to let redux and react talk to each other
 const root = ReactDOM.createRoot(document.getElementById('root'));
